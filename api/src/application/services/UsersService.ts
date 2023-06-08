@@ -1,3 +1,4 @@
+import { hash } from "bcrypt";
 import { IUser } from "../../domain/interfaces/UsersInterface";
 import { UsersRepository } from "../repositories/UsersRepository";
 
@@ -15,7 +16,9 @@ class UsersService{
       throw new Error("User already exists.");
     }
 
-    const user = await this.usersRepository.create(name, email, password);
+    const hashPassword = await hash(password, 10);
+
+    const user = await this.usersRepository.create(name, email, hashPassword);
 
     return user;
   }
