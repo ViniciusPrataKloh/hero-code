@@ -28,9 +28,9 @@ class UsersController{
 
   async handleListUsers(request: Request, response: Response, next: NextFunction){
     try {
-      const users = await this.usersService.executeListUsers();
+      const userResponse = await this.usersService.executeListUsers();
 
-      return response.status(200).json(users);      
+      return response.status(200).json(userResponse);      
     } catch (error) {
       next(error)
     }
@@ -40,9 +40,9 @@ class UsersController{
     const {email} = request.params;
 
     try {
-      const user = await this.usersService.executeShowUser(email);
+      const userResponse = await this.usersService.executeShowUser(email);
 
-      return response.status(200).json(user);
+      return response.status(200).json(userResponse);
     } catch (error) {
       next(error)
     }
@@ -50,7 +50,14 @@ class UsersController{
 
   async handleUpdateUser(request: Request, response: Response, next: NextFunction){
     try {
-      
+      const avatarUrl = request.file?.path;
+
+      const {password, oldPassword} = request.body;
+      const {email} = request.params;
+
+      const userResponse = await this.usersService.executeUpdateUser(email, password, oldPassword, avatarUrl);
+
+      return response.status(200).send(userResponse);
     } catch (error) {
       next(error)
     }

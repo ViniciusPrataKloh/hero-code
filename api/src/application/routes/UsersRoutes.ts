@@ -1,10 +1,13 @@
 import { Router } from "express";
 import { UsersController } from "../controllers/UsersController";
+import multer from "multer";
+import uploadConfig from "../middlewares/Upload";
 
 class UsersRoutes{
 
   private router: Router;
   private usersController: UsersController;
+  private uploadAvatar = multer(uploadConfig.upload("../uploads"));
 
   constructor(){
     this.router = Router();
@@ -18,7 +21,7 @@ class UsersRoutes{
     
     this.router.get('/', this.usersController.handleListUsers.bind(this.usersController));
     
-    this.router.put('/', this.usersController.handleUpdateUser.bind(this.usersController));
+    this.router.put('/:email', this.uploadAvatar.single("avatarUrl") , this.usersController.handleUpdateUser.bind(this.usersController));
 
     return this.router;
   }

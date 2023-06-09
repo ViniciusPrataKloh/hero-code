@@ -1,4 +1,4 @@
-import { hash } from "bcrypt";
+import { compare, hash } from "bcrypt";
 import { IUser } from "../../domain/interfaces/UsersInterface";
 import { UsersRepository } from "../repositories/UsersRepository";
 
@@ -26,7 +26,7 @@ class UsersService{
   async executeListUsers(){
     const users = await this.usersRepository.list();
 
-    return users;
+    return users; 
   }
 
   async executeShowUser(email: string){
@@ -35,8 +35,29 @@ class UsersService{
     return user;
   }
 
-  async executeUpdateUser(){
+  async executeUpdateUser(email: string, password: string, oldPassword: string, avatarUrl?: string){
+    let user = await this.usersRepository.findUserByEmail(email);
 
+    if(!user){
+      throw new Error("User not exists!");
+    }
+
+    const comparePassword = await compare(oldPassword, user.password);
+ 
+    if(!comparePassword){
+      throw new Error("Invalid credentials!");
+    }
+
+    const hashPassword = await hash(password, 10); 
+
+    user = await this.usersRepository.update(
+      email,
+      user.name,
+      hashPassword,
+      avatarUrl
+    );
+
+    return user;
   }
 }
 
