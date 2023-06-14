@@ -52,10 +52,10 @@ class UsersController{
     try {
       const avatarUrl = request.file?.path;
 
-      const {password, oldPassword} = request.body;
-      const {email} = request.params;
+      const {password, oldPassword, name} = request.body;
+      const {user_id} = request;
 
-      const userResponse = await this.usersService.executeUpdateUser(email, password, oldPassword, avatarUrl);
+      const userResponse = await this.usersService.executeUpdateUser(user_id, name, password, oldPassword, avatarUrl);
 
       return response.status(200).send(userResponse);
     } catch (error) {

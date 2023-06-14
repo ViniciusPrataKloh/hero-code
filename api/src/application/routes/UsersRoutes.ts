@@ -25,7 +25,7 @@ class UsersRoutes{
     
     this.router.get('/', this.usersController.handleListUsers.bind(this.usersController));
     
-    this.router.put('/:email', this.authorization.authorize, this.uploadAvatar.single("avatarUrl") , this.usersController.handleUpdateUser.bind(this.usersController));
+    this.router.put('/', this.authorization.authorize, this.uploadAvatar.single("avatarUrl") , this.usersController.handleUpdateUser.bind(this.usersController));
 
     this.router.post('/auth', this.usersController.handleAuthUser.bind(this.usersController));
 

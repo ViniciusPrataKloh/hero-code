@@ -36,24 +36,33 @@ class UsersService{
     return user;
   }
 
-  async executeUpdateUser(email: string, password: string, oldPassword: string, avatarUrl?: string){
-    let user = await this.usersRepository.findUserByEmail(email);
+  async executeUpdateUser(user_id: string, name: string, password: string, oldPassword: string, avatarUrl?: string){
+    let user = await this.usersRepository.findUserById(user_id);
 
     if(!user){
       throw new Error("User not exists!");
     }
 
-    const comparePassword = await compare(oldPassword, user.password);
+    let hashPassword = user.password;
+    let userName = user.name;
+
+    if(oldPassword && password){
+      const comparePassword = await compare(oldPassword, user.password);
  
-    if(!comparePassword){
-      throw new Error("Invalid credentials!");
+      if(!comparePassword){
+        throw new Error("Invalid credentials!");
+      }
+
+      hashPassword = await hash(password, 10); 
     }
 
-    const hashPassword = await hash(password, 10); 
+    if(name){
+      userName = name;
+    }
 
     user = await this.usersRepository.update(
-      email,
-      user.name,
+      user_id,
+      userName,
       hashPassword,
       avatarUrl
     );
@@ -75,7 +84,7 @@ class UsersService{
     }
 
     const secretKey: string | undefined = process.env.TOKEN_SECRET_KEY;
-    
+
     if(!secretKey){
       throw new Error("Invalid token secrety key!");
     }

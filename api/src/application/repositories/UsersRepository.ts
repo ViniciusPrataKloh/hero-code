@@ -5,6 +5,7 @@ import { IUser } from "../../domain/interfaces/UsersInterface";
 export interface IUsersRepository{
   create(name: string, email: string, password: string): Promise<User>;
   findUserByEmail(email: string): Promise<User | null>;
+  findUserById(user_id: string): Promise<User | null>;
   list(): Promise<IUser[]>;
   update(email: string, name: string, password: string, avatarUrl: string): Promise<IUser>;
 }
@@ -23,6 +24,7 @@ class UsersRepository implements IUsersRepository{
 
     return user;
   }
+
   async findUserByEmail(email: string): Promise<User | null> {
     const user = await prisma.user.findUnique({
       where: {
@@ -32,19 +34,29 @@ class UsersRepository implements IUsersRepository{
 
     return user;
   }
+
+  async findUserById(user_id: string): Promise<User | null> {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: user_id
+      }
+    });
+
+    return user;
+  }
+
   async list(): Promise<IUser[]> {
     const users = await prisma.user.findMany();
 
     return users;
   }
 
-  async update(email: string, name: string, newPassword: string, avatarUrl: string = ""): Promise<IUser> {
+  async update(user_id: string, name: string, newPassword: string, avatarUrl: string = ""): Promise<IUser> {
     const user = await prisma.user.update({
       where: {
-        email
+        id: user_id
       },
       data: {
-        email,
         name,
         password: newPassword,
         avatarUrl
