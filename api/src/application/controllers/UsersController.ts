@@ -62,6 +62,18 @@ class UsersController{
       next(error)
     }
   }
+
+  async handleAuthUser(request: Request, response: Response, next: NextFunction){
+    try{
+      const {email, password} = request.body;
+
+      const authResponse = await this.usersService.executeAuthUser(email, password);
+
+      return response.status(200).send(authResponse);
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 export { UsersController };

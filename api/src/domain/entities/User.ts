@@ -1,6 +1,7 @@
 import { IUser } from "../interfaces/UsersInterface";
 
 class User{
+  id?: string;
   name: string;
   email: string;
   password: string;

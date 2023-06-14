@@ -1,6 +1,7 @@
-import { compare, hash } from "bcrypt";
+import { compare, hash  } from "bcrypt";
 import { IUser } from "../../domain/interfaces/UsersInterface";
 import { UsersRepository } from "../repositories/UsersRepository";
+import { sign} from "jsonwebtoken";
 
 class UsersService{
   private usersRepository: UsersRepository;
@@ -58,6 +59,39 @@ class UsersService{
     );
 
     return user;
+  }
+
+  async executeAuthUser(email: string, password: string){
+    const user = await this.usersRepository.findUserByEmail(email);
+
+    if(!user){
+      throw new Error("Invalid credentials!");
+    }
+
+    const passwordMatch = await compare(password, user.password);
+
+    if(!passwordMatch){
+      throw new Error("Invalid credentials!");
+    }
+
+    const secretKey: string | undefined = process.env.TOKEN_SECRET_KEY;
+    
+    if(!secretKey){
+      throw new Error("Invalid token secrety key!");
+    }
+
+    const token = sign({email}, secretKey, {
+      subject: user.id,
+      expiresIn: 60 * 60
+    });
+
+    return {
+      token,
+      user: {
+        name: user.name,
+        email: user.email
+      }
+    }
   }
 }
 
