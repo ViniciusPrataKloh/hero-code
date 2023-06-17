@@ -20,7 +20,8 @@ export default {
       },
 
       backgroundImage: {
-        'login': 'url(./src/assets/background-login.png)'
+        'login': 'url(./src/assets/background-login.png)',
+        'signup': 'url(./src/assets/background-signup.png)'
       }
     },
   },
