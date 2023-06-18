@@ -31,7 +31,7 @@ export function SignUp(){
                             <button className="mt-3 py-2 w-full bg-blue-800 text-white font-bold rounded-2xl hover:bg-blue-600 transition-colors">Cadastrar</button>
                         </form>
 
-                        <span className="mt-4 text-gray-50 text-xs">Já tem cadastro? <a className="font-bold text-white underline hover:cursor-pointer hover:text-gray-50">Voltar à Página Inicial</a></span>
+                        <span className="mt-4 text-gray-50 text-xs">Já tem cadastro? <a className="font-bold text-white hover:underline hover:cursor-pointer hover:text-gray-50">Voltar à Página Inicial</a></span>
                     </div>
                 </div>
 
