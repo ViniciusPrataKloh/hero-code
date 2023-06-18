@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-    /* --primary: #348789;
+    --primary: #348789;
     --secondary: #001489;
     --secondary-50: #283dae;
 
@@ -13,7 +13,7 @@
     --gray-300: #7c888388;
 
     --white: #fff;
-    --black: #272830; */
+    --black: #272830;
   }
   
   * {
@@ -32,5 +32,5 @@
   }
   
   body {
-    /* background-color: var(--gray-50); */
+    background-color: var(--gray-50);
   }

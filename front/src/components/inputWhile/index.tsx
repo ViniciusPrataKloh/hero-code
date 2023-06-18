@@ -1,5 +1,3 @@
-import { EnvelopeSimple } from "phosphor-react";
-import React from "react";
 
 interface Props{
     placeholder: string;
@@ -14,7 +12,7 @@ interface IconTypeProps {
   }
 
 
-export function Input({placeholder, type, icon}: Props){
+export function InputWhite({placeholder, type, icon}: Props){
     return(
         <div className="flex items-center gap-2 bg-white rounded-md px-4 py-2 text-md text-black">
             <i>

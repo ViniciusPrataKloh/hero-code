@@ -17,6 +17,8 @@ export default {
 
         '--white': '#fff',
         '--black': '#272830',
+
+        'gradient': 'linear-gradient(#348789, #001489)'
       },
 
       backgroundImage: {
