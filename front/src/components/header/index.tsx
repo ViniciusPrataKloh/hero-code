@@ -3,7 +3,7 @@ import logo from "../../assets/header-logo.png";
 
 export function Header(){
   return(
-    <header className="flex flex-row justify-between items-center rounded-2xl -bg-primary shadow-gray-600 shadow-lg py-3 px-6 font-bold text-white">
+    <header className="flex flex-row justify-between items-center rounded-2xl -bg-primary shadow-gray-400 shadow-lg py-3 px-6 font-bold text-white">
       <div className="flex items-center gap-4">
         <img src={logo} alt="" />
         <span>Hero Hairdresses</span>
