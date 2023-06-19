@@ -17,7 +17,7 @@ export function Schedule(){
             <InputTransparent placeholder="(xx) xxxxx-xxxx" type="tel"/>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-2">
             <div className="flex flex-col">
               <label>Data</label>
               <InputTransparent placeholder="Seu" type="date"/>
