@@ -1,3 +1,4 @@
+import { Clock } from "phosphor-react";
 import { InputTransparent } from "../../components/inputTransparent";
 
 export function Schedule(){
@@ -16,14 +17,14 @@ export function Schedule(){
             <InputTransparent placeholder="(xx) xxxxx-xxxx)" type="tel"/>
           </div>
 
-          <div className="flex flex-row items-center justify-between gap-10">
+          <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col">
               <label>Data</label>
               <InputTransparent placeholder="Seu" type="date"/>
             </div>
             <div className="flex flex-col">
               <label>Horário</label>
-              <InputTransparent placeholder="Seu" type="time"/>
+              <InputTransparent placeholder="Seu" type="time" icon={<Clock size={20}/>}/>
             </div>
           </div>
 
