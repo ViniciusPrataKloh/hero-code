@@ -1,13 +1,28 @@
 import { useState } from 'react'
 import { Schedule } from '../../components/schedule'
+import { DayPicker } from 'react-day-picker'
+import { ptBR } from 'date-fns/locale'
 
-import Calendar from 'react-calendar'
-import 'react-calendar/dist/Calendar.css'
+import styles from './calendar.module.css'
 
 export function Home() {
     const [date, setDate] = useState<Date>(new Date())
 
-    const today = new Date().toLocaleDateString('pt-BR')
+    function isWeekend(date: Date) {
+        const day = date.getDay()
+        return day === 0 || day === 6
+    }
+
+    function isWeekDay(date: Date) {
+        const day = date.getDay()
+        return day !== 0 && day !== 6
+    }
+
+    function handleDateChange(date: Date) {
+        setDate(date)
+    }
+
+    const today = date.toLocaleDateString('pt-BR')
 
     return (
         <main className="mt-8">
@@ -39,11 +54,25 @@ export function Home() {
                     </div>
 
                     {/* Right */}
-                    <div className="w-[520px] h-[365px] -bg-primary mt-7 ml-12 py-4">
-                        <Calendar
-                            value={date}
-                            locale="pt-BR"
-                            className="-bg-primary text-gray-50"
+                    <div className="flex justify-center items-center">
+                        <DayPicker
+                            // className="-bg-primary px-4 py-4 rounded-lg w-fit h-fit text-white shadow-lg shadow-gray-600"
+                            mode="single"
+                            disableNavigation
+                            showOutsideDays
+                            // fixedWeeks
+                            locale={ptBR}
+                            className={styles.calendar}
+                            classNames={{ day: styles.day }}
+                            selected={date}
+                            modifiersClassNames={{
+                                selected: styles.selected,
+                                disabled: styles.disabled,
+                                outside: styles.outside,
+                            }}
+                            modifiers={{ available: isWeekDay }}
+                            disabled={isWeekend}
+                            onDayClick={handleDateChange}
                         />
                     </div>
                 </div>

@@ -4,11 +4,12 @@
 
 :root {
     --primary: #348789;
+    --primary-50: #4caaac;
     --secondary: #001489;
     --secondary-50: #283dae;
 
     --gray-50: #DDDFEB;
-    --gray-100: #97909050;
+    --gray-100: #b9bbc4;
     --gray-200: #535653;
     --gray-300: #7c888388;
 

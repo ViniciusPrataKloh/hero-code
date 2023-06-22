@@ -1,0 +1,35 @@
+.calendar{
+  background-color: var(--primary);
+  color: var(--white);
+  height: fit-content;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 4px 8px 8px rgb(0, 0, 0, 0.3);
+}
+
+.day:not(.disable){
+  background-color: var(--white);
+  width: 40px;
+  height: 40px;
+  color: var(--black);
+  margin: 0.15rem;
+  border-radius: 5px;
+}
+
+.disabled{
+  background-color: var(--gray-300) !important;
+  color: var(--gray-50) !important;
+  cursor: not-allowed !important;
+}
+
+.outside{
+  background-color: transparent !important;
+  color: var(--gray-50) !important;
+  cursor: not-allowed !important;
+}
+
+.selected{
+  background-color: var(--secondary) !important;
+  color: var(--white) !important;
+  font-weight: bold;
+}

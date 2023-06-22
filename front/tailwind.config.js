@@ -1,12 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 
 export default {
-    content: ['./index.html', './src/**/*.tsx'],
+    content: [
+        './index.html',
+        './src/**/*.tsx',
+        './node_modules/react-tailwindcss-datepicker/dist/index.esm.js',
+    ],
 
     theme: {
         extend: {
             colors: {
                 '-primary': '#348789',
+                '-primary-50': '#4caaac',
                 '-secondary': '#001489',
                 '-secondary-50': '#3e53cf',
 
