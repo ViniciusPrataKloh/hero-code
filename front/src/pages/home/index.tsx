@@ -56,7 +56,6 @@ export function Home() {
                     {/* Right */}
                     <div className="flex justify-center items-center">
                         <DayPicker
-                            // className="-bg-primary px-4 py-4 rounded-lg w-fit h-fit text-white shadow-lg shadow-gray-600"
                             mode="single"
                             disableNavigation
                             showOutsideDays

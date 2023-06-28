@@ -1,7 +1,7 @@
 import { compare, hash  } from "bcrypt";
 import { IUser } from "../../domain/interfaces/UsersInterface";
 import { UsersRepository } from "../repositories/UsersRepository";
-import { sign} from "jsonwebtoken";
+import { sign } from "jsonwebtoken";
 
 class UsersService{
   private usersRepository: UsersRepository;

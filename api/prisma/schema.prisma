@@ -17,6 +17,8 @@ model User {
   password  String
   avatarUrl String @default("")
 
+  schedules Schedule[]
+
   @@map("users")
 }
 
@@ -25,6 +27,9 @@ model Schedule {
   name  String
   phone String
   date  DateTime
+
+  user   User   @relation(fields: [user_id], references: [id])
+  user_id String
 
   @@map("schedules")
 }
