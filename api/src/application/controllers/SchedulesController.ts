@@ -37,6 +37,7 @@ class SchedulesController{
   async handleDeleteSchedule(request: Request, response: Response, next: NextFunction){
     try{
       const { schedule_id } = request.params;
+      console.log(schedule_id);
 
       await this.schedulesService.executeDeleteSchedule(schedule_id);
 

@@ -19,9 +19,9 @@ class SchedulesRoutes{
     
     this.router.get('/:date', this.authorization.authorize, this.schedulesController.handleListSchedules.bind(this.schedulesController));
     
-    this.router.get('/', this.authorization.authorize, this.schedulesController.handleListSchedules.bind(this.schedulesController));
-    
     this.router.put('/', this.authorization.authorize, this.schedulesController.handleUpdateSchedule.bind(this.schedulesController));
+    
+    this.router.delete('/:schedule_id', this.authorization.authorize, this.schedulesController.handleDeleteSchedule.bind(this.schedulesController));
 
     return this.router;
   }
