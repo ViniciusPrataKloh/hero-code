@@ -41,24 +41,25 @@ class SchedulesService{
 
     await this.schedulesRepository.delete(schedule_id);
 
-    return
+    return;
   }
 
-  async executeUpdateSchedule(schedule_id: string, name?: string, phone?: string, date?: Date){
-    const schedule = await this.schedulesRepository.findById(schedule_id);
+  async executeUpdateSchedule(schedule_id: string, name: string, phone: string, date: Date){
+    let schedule = await this.schedulesRepository.findById(schedule_id);
 
     if(!schedule){
       throw new Error("Schedule not exists!");
     }
 
-    schedule.name = !(name !== undefined && schedule.name === name) ? schedule.name : name; 
-    schedule.phone = !(phone !== undefined && schedule.phone === phone) ? schedule.phone : phone; 
-    schedule.date = !(date !== undefined && schedule.date === date) ? schedule.date : date; 
+    schedule.name = (schedule.name === name) ? schedule.name : name; 
+    schedule.phone = (schedule.phone === phone) ? schedule.phone : phone; 
+    schedule.date = (schedule.date === date) ? schedule.date : date; 
 
+    console.log(schedule);
 
-    await this.schedulesRepository.update(schedule_id, schedule.name, schedule.phone, schedule.date);
+    schedule = await this.schedulesRepository.update(schedule_id, schedule.name, schedule.phone, schedule.date);
 
-    return
+    return schedule;
   }
 }
 

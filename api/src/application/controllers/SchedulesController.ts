@@ -37,7 +37,6 @@ class SchedulesController{
   async handleDeleteSchedule(request: Request, response: Response, next: NextFunction){
     try{
       const { schedule_id } = request.params;
-      console.log(schedule_id);
 
       await this.schedulesService.executeDeleteSchedule(schedule_id);
 
@@ -49,9 +48,11 @@ class SchedulesController{
 
   async handleUpdateSchedule(request: Request, response: Response, next: NextFunction){
     try{
-      const { name, phone, date, schedule_id } = request.body;
+      const { name, phone, date } = request.body;
+      const { schedule_id } = request.params;
+      console.log(phone);
 
-      const scheduleResponse = await this.schedulesService.executeUpdateSchedule(name, phone, date, schedule_id);
+      const scheduleResponse = await this.schedulesService.executeUpdateSchedule(schedule_id, name, phone, date);
 
       return response.status(200).send(scheduleResponse);
     } catch (error) {
