@@ -1,11 +1,13 @@
 import express, { Application, NextFunction, Request, Response } from "express";
 import { UsersRoutes } from "./application/routes/UsersRoutes";
 import { SchedulesRoutes } from "./application/routes/SchedulesRoutes";
+import cors from 'cors'
 
 const app: Application = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors())
 
 const usersRoutes = new UsersRoutes().getRoutes();
 const schedulesRoutes = new SchedulesRoutes().getRoutes();
