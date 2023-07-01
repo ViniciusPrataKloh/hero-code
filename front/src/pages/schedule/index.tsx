@@ -1,39 +1,67 @@
-import { Clock } from "phosphor-react";
-import { InputTransparent } from "../../components/inputTransparent";
+import { Clock } from 'phosphor-react'
+import { InputTransparent } from '../../components/inputTransparent'
+import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
-export function Schedule(){
-  return(
-    <section className="mt-8 mx-auto">
-      <h2 className="-text-primary text-2xl font-medium mb-12">Agendamento de Horário</h2>
+export function Schedule() {
+    const navigate = useNavigate()
 
-      <div className="flex items-center justify-center">      
-        <form className="flex flex-col items-center gap-2 mt-8 font-medium -text-primary">
-          <div className="flex flex-col">
-            <label>Nome do cliente</label>
-            <InputTransparent placeholder="Vinícius Prata" type="text"/>
-          </div>
-          <div className="flex flex-col">
-            <label>Celular</label>
-            <InputTransparent placeholder="(xx) xxxxx-xxxx" type="tel"/>
-          </div>
+    useEffect(() => {
+        const token = localStorage.getItem('tokenHeroId')
 
-          <div className="grid grid-cols-2 gap-2">
-            <div className="flex flex-col">
-              <label>Data</label>
-              <InputTransparent placeholder="Seu" type="date"/>
+        if (!token) {
+            navigate('/login')
+        }
+    }, [])
+
+    return (
+        <section className="mt-8 mx-auto">
+            <h2 className="-text-primary text-2xl font-medium mb-12">
+                Agendamento de Horário
+            </h2>
+
+            <div className="flex items-center justify-center">
+                <form className="flex flex-col items-center gap-2 mt-8 font-medium -text-primary">
+                    <div className="flex flex-col">
+                        <label>Nome do cliente</label>
+                        <InputTransparent
+                            placeholder="Vinícius Prata"
+                            type="text"
+                        />
+                    </div>
+                    <div className="flex flex-col">
+                        <label>Celular</label>
+                        <InputTransparent
+                            placeholder="(xx) xxxxx-xxxx"
+                            type="tel"
+                        />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2">
+                        <div className="flex flex-col">
+                            <label>Data</label>
+                            <InputTransparent placeholder="Seu" type="date" />
+                        </div>
+                        <div className="flex flex-col">
+                            <label>Horário</label>
+                            <InputTransparent
+                                placeholder="Seu"
+                                type="time"
+                                icon={<Clock size={20} />}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="mt-8 flex items-center justify-center gap-4">
+                        <button className="w-[110px] py-2.5 px-4 border-2 -border-secondary -text-secondary font-semibold rounded-2xl hover:text-white hover:bg-red-400 hover:border-red-500 transition-colors">
+                            Cancelar
+                        </button>
+                        <button className="w-[110px] py-2.5 px-4 border-2 -bg-secondary -border-secondary text-white font-semibold rounded-2xl hover:-bg-secondary-50 hover:-border-secondary-50 transition-colors">
+                            Editar
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div className="flex flex-col">
-              <label>Horário</label>
-              <InputTransparent placeholder="Seu" type="time" icon={<Clock size={20}/>}/>
-            </div>
-          </div>
-
-          <div className="mt-8 flex items-center justify-center gap-4">
-            <button className="w-[110px] py-2.5 px-4 border-2 -border-secondary -text-secondary font-semibold rounded-2xl hover:text-white hover:bg-red-400 hover:border-red-500 transition-colors" >Cancelar</button>
-            <button className="w-[110px] py-2.5 px-4 border-2 -bg-secondary -border-secondary text-white font-semibold rounded-2xl hover:-bg-secondary-50 hover:-border-secondary-50 transition-colors">Editar</button>
-          </div>
-        </form>
-      </div>
-    </section>
-  )
+        </section>
+    )
 }

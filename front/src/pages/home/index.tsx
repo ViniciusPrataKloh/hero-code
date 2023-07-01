@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Schedule } from '../../components/schedule'
 import { DayPicker } from 'react-day-picker'
 import { ptBR } from 'date-fns/locale'
@@ -7,6 +8,8 @@ import styles from './calendar.module.css'
 
 export function Home() {
     const [date, setDate] = useState<Date>(new Date())
+
+    const navigate = useNavigate()
 
     function isWeekend(date: Date) {
         const day = date.getDay()
@@ -21,6 +24,14 @@ export function Home() {
     function handleDateChange(date: Date) {
         setDate(date)
     }
+
+    useEffect(() => {
+        const token = localStorage.getItem('tokenHeroId')
+
+        if (!token) {
+            navigate('/login')
+        }
+    }, [])
 
     const today = date.toLocaleDateString('pt-BR')
 
