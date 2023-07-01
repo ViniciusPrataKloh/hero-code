@@ -1,11 +1,13 @@
 import { EnvelopeSimple, Key } from 'phosphor-react'
-import logo from '../../assets/logo.png'
 import { InputWhite } from '../../components/inputWhile'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import { zodResolver } from '@hookform/resolvers/zod'
-import * as zod from 'zod'
 import { api } from '../../utils/axios'
 import { AxiosError, AxiosResponse } from 'axios'
+import * as zod from 'zod'
+
+import logo from '../../assets/logo.png'
 
 const signInFormSchema = zod.object({
     email: zod.string().email('Informe um email válido.'),
@@ -19,6 +21,8 @@ export function Login() {
         resolver: zodResolver(signInFormSchema),
     })
 
+    const navigate = useNavigate()
+
     async function onHandleSubmit() {
         await api
             .post('users/auth', {
@@ -26,9 +30,9 @@ export function Login() {
                 password,
             })
             .then((response: AxiosResponse) => {
-                alert('Login realizado com sucesso!')
                 const token = response.data.token
                 localStorage.setItem('tokenHeroId', token)
+                navigate('/')
             })
             .catch((reason: AxiosError<{ message: string }>) => {
                 console.error(reason.response?.data.message)
