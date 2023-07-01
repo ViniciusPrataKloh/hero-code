@@ -2,12 +2,12 @@ import { EnvelopeSimple, Key, Person } from 'phosphor-react'
 import { InputWhite } from '../../components/inputWhile'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import * as zod from 'zod'
-
-import logo from '../../assets/logo.png'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { api } from '../../utils/axios'
 import { AxiosError } from 'axios'
+import * as zod from 'zod'
+
+import logo from '../../assets/logo.png'
 
 const signUpFormSchema = zod.object({
     name: zod.string(),
