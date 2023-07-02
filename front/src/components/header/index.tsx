@@ -1,12 +1,15 @@
 import { UserCircle } from 'phosphor-react'
 import logo from '../../assets/header-logo.png'
 import { Link, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { AccountContext } from '../../contexts/AccountContext'
 
 export function Header() {
     const [dropdownIsOpen, setDropdownIsOpen] = useState<boolean>(false)
 
     const navigate = useNavigate()
+
+    const { user } = useContext(AccountContext)
 
     function handleOpenCloseDropdown() {
         setDropdownIsOpen(!dropdownIsOpen)
@@ -30,7 +33,7 @@ export function Header() {
                 onClick={handleOpenCloseDropdown}
             >
                 <UserCircle size={24} weight="bold" />
-                <span>Perfil</span>
+                <span>{user ? user.name : 'Perfil'}</span>
             </button>
 
             {dropdownIsOpen ? (
