@@ -1,39 +1,64 @@
 import { UserCircle } from 'phosphor-react'
 import logo from '../../assets/header-logo.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
 export function Header() {
     const [dropdownIsOpen, setDropdownIsOpen] = useState<boolean>(false)
 
+    const navigate = useNavigate()
+
+    function handleOpenCloseDropdown() {
+        setDropdownIsOpen(!dropdownIsOpen)
+    }
+
+    function handleLogout() {
+        localStorage.removeItem('tokenHeroId')
+        navigate('/login')
+    }
+
     return (
-        <header className="flex flex-row justify-between items-center rounded-2xl -bg-primary shadow-gray-400 shadow-lg py-3 px-6 font-bold text-white">
+        <header className="relative flex flex-row justify-between items-center rounded-2xl -bg-primary shadow-gray-400 shadow-lg py-3 px-6 font-bold text-white">
             <Link to={'/'} className="flex items-center gap-4">
                 <img src={logo} alt="" />
                 <span>Hero Hairdresses</span>
             </Link>
 
-            {/* <Link to="/profile" className="flex items-center gap-2">
+            <button
+                type="button"
+                className="flex items-center gap-2"
+                onClick={handleOpenCloseDropdown}
+            >
                 <UserCircle size={24} weight="bold" />
                 <span>Perfil</span>
-            </Link> */}
+            </button>
 
             {dropdownIsOpen ? (
                 <div className="flex items-center gap-2">
-                    <UserCircle size={24} weight="bold" />
-                    <span>Perfil</span>
+                    {/* <UserCircle size={24} weight="bold" />
+                    <span>Perfil</span> */}
 
                     <div className="relative flex font-normal">
                         <ul className="absolute -bg-primary top-4 right-2 p-0 list-none rounded-lg">
-                            <li className="px-3 py-4 hover:-bg-primary-50 hover: rounded-lg">
+                            <Link
+                                to="/schedule"
+                                className="px-3 py-4 hover:-bg-primary-50 hover: rounded-lg"
+                            >
                                 Agendamentos
-                            </li>
-                            <li className="px-3 py-4 hover:-bg-primary-50 hover: rounded-lg">
+                            </Link>
+                            <Link
+                                to="/profile"
+                                className="px-3 py-4 hover:-bg-primary-50 hover: rounded-lg"
+                            >
                                 Editar perfil
-                            </li>
-                            <li className="px-3 py-4 hover:-bg-primary-50 hover: rounded-lg">
+                            </Link>
+                            <button
+                                type="button"
+                                onClick={handleLogout}
+                                className="px-3 py-4 hover:-bg-primary-50 hover: rounded-lg"
+                            >
                                 Sair
-                            </li>
+                            </button>
                         </ul>
                     </div>
                 </div>
