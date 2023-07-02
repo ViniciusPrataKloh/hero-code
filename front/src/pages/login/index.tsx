@@ -8,6 +8,8 @@ import { AxiosError, AxiosResponse } from 'axios'
 import * as zod from 'zod'
 
 import logo from '../../assets/logo.png'
+import { useContext } from 'react'
+import { AccountContext } from '../../contexts/AccountContext'
 
 const signInFormSchema = zod.object({
     email: zod.string().email('Informe um email válido.'),
@@ -23,6 +25,8 @@ export function Login() {
 
     const navigate = useNavigate()
 
+    const { handleSetUser } = useContext(AccountContext)
+
     async function onHandleSubmit() {
         await api
             .post('users/auth', {
@@ -32,6 +36,10 @@ export function Login() {
             .then((response: AxiosResponse) => {
                 const token = response.data.token
                 localStorage.setItem('tokenHeroId', token)
+
+                const { id, name, email } = response.data.user
+                handleSetUser(id, name, email)
+
                 navigate('/')
             })
             .catch((reason: AxiosError<{ message: string }>) => {
