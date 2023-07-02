@@ -97,6 +97,7 @@ class UsersService{
     return {
       token,
       user: {
+        id: user.id,
         name: user.name,
         email: user.email
       }
