@@ -1,7 +1,7 @@
 import { EnvelopeSimple, Key } from 'phosphor-react'
 import { InputWhite } from '../../components/inputWhile'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { api } from '../../utils/axios'
 import { AxiosError, AxiosResponse } from 'axios'
@@ -93,9 +93,12 @@ export function Login() {
                         </span>
                         <span className="mt-1 text-gray-50 text-xs">
                             Ainda não tem conta?{' '}
-                            <a className="font-bold text-white hover:underline hover:cursor-pointer hover:text-gray-50">
+                            <Link
+                                to="/signup"
+                                className="font-bold text-white hover:underline hover:cursor-pointer hover:text-gray-50"
+                            >
                                 Cadastre-se
-                            </a>
+                            </Link>
                         </span>
                     </div>
                 </div>
