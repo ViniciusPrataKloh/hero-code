@@ -1,16 +1,20 @@
 import { Clock } from 'phosphor-react'
 import { InputTransparent } from '../../components/inputTransparent'
 import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { getTime } from 'date-fns'
 import { api } from '../../utils/axios'
 import { AxiosError } from 'axios'
+import { AccountContext } from '../../contexts/AccountContext'
 
 export function Schedule() {
     const { register, handleSubmit, watch } = useForm()
+    let token
 
     const navigate = useNavigate()
+
+    const { user } = useContext(AccountContext)
 
     function convertDateAndHourToTimestamp(date: string, hour: string) {
         console.log(getTime(new Date(date + 'T00:' + hour + '.000Z')))
@@ -19,7 +23,7 @@ export function Schedule() {
     async function handleSubmitForm() {
         await api
             .post('/schedules', {
-                // Verificar qual será o user_id utilizado aqui
+                user_id: user?.id,
                 name,
                 phone,
                 date: convertDateAndHourToTimestamp(date, hour),
@@ -35,12 +39,12 @@ export function Schedule() {
     }
 
     useEffect(() => {
-        const token = localStorage.getItem('tokenHeroId')
+        token = localStorage.getItem('tokenHeroId')
 
         if (!token) {
             navigate('/login')
         }
-    }, [])
+    }, [token])
 
     const name = watch('name')
     const phone = watch('phone')
