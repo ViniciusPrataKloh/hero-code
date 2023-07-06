@@ -3,7 +3,7 @@ import { InputTransparent } from '../../components/inputTransparent'
 import { useNavigate } from 'react-router-dom'
 import { useContext, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { getTime } from 'date-fns'
+// import { getTime } from 'date-fns'
 import { api } from '../../utils/axios'
 import { AxiosError } from 'axios'
 import { AccountContext } from '../../contexts/AccountContext'
@@ -16,8 +16,12 @@ export function Schedule() {
 
     const { user } = useContext(AccountContext)
 
-    function convertDateAndHourToTimestamp(date: string, hour: string) {
-        console.log(getTime(new Date(date + 'T00:' + hour + '.000Z')))
+    // function convertDateAndHourToTimestamp(date: string, hour: string) {
+    //     return getTime(new Date(date + 'T00:' + hour + '.000Z'))
+    // }
+
+    function formatDateAndHour(date: string, hour: string) {
+        return new Date(date + 'T00:' + hour + '.000Z')
     }
 
     async function handleSubmitForm() {
@@ -26,11 +30,11 @@ export function Schedule() {
                 user_id: user?.id,
                 name,
                 phone,
-                date: convertDateAndHourToTimestamp(date, hour),
+                date: formatDateAndHour(date, hour),
             })
             .then(() => {
                 alert('Agendamento criado com sucesso!')
-                navigate('/shedule')
+                navigate('/schedule')
             })
             .catch((reason: AxiosError<{ message: string }>) => {
                 console.error(reason.response?.data.message)

@@ -10,6 +10,8 @@ class SchedulesService{
 
   async executeCreateSchedule(name: string, phone: string, date: Date, user_id: string){
     const scheduleAlreadyExists = await this.schedulesRepository.findByDateAndUser(date, user_id);
+    console.log({date })
+    console.log(scheduleAlreadyExists)
 
     if(scheduleAlreadyExists){
       throw new Error("Schedule already exists at this time for this user!");
