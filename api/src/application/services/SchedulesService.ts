@@ -10,8 +10,6 @@ class SchedulesService{
 
   async executeCreateSchedule(name: string, phone: string, date: Date, user_id: string){
     const scheduleAlreadyExists = await this.schedulesRepository.findByDateAndUser(date, user_id);
-    console.log({date })
-    console.log(scheduleAlreadyExists)
 
     if(scheduleAlreadyExists){
       throw new Error("Schedule already exists at this time for this user!");
@@ -22,12 +20,9 @@ class SchedulesService{
     return schedule;
   }
 
-  async executeListSchedules(date: string, user_id: string){
-    const day_start = startOfDay(new Date(date));
-    const day_end = endOfDay(new Date(day_start));
-
-    // const timestamp_start = getTime(day_start)
-    // const timestamp_end = getTime(day_end)
+  async executeListSchedules(day: number, user_id: string){
+    const day_start = startOfDay(new Date(day));
+    const day_end = endOfDay(new Date(day));
 
     const schedules = await this.schedulesRepository.findByDayAndUser(day_start, day_end, user_id);
 

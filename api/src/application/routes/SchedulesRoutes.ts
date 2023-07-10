@@ -17,7 +17,7 @@ class SchedulesRoutes{
   getRoutes(){
     this.router.post('/', this.authorization.authorize, this.schedulesController.handleCreateSchedule.bind(this.schedulesController));
     
-    this.router.get('/:date', this.authorization.authorize, this.schedulesController.handleListSchedules.bind(this.schedulesController));
+    this.router.get('/:day', this.authorization.authorize, this.schedulesController.handleListSchedules.bind(this.schedulesController));
     
     this.router.put('/:schedule_id', this.authorization.authorize, this.schedulesController.handleUpdateSchedule.bind(this.schedulesController));
     

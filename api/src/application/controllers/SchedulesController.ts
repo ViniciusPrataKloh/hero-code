@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { SchedulesService } from "../services/SchedulesService"
+import { format, formatISO } from "date-fns";
 
 class SchedulesController{
   private schedulesService: SchedulesService;
@@ -23,10 +24,10 @@ class SchedulesController{
 
   async handleListSchedules(request: Request, response: Response, next: NextFunction){
     try{
-      const { date } = request.params;
+      const { day } = request.params;
       const { user_id } = request;
 
-      const schedulesResponse = await this.schedulesService.executeListSchedules(date, user_id);
+      const schedulesResponse = await this.schedulesService.executeListSchedules(parseInt(day), user_id);
 
       return response.status(201).send(schedulesResponse);
     } catch (error) {
