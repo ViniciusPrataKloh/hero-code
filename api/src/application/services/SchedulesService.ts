@@ -1,5 +1,5 @@
 import { SchedulesRepository } from "../repositories/SchedulesRepository"
-import { endOfDay, getDay, getDayOfYear, getTime, parse, startOfDay } from "date-fns"
+import { endOfDay, format, getDay, getDayOfYear, getTime, parse, startOfDay } from "date-fns"
 
 class SchedulesService{
   private schedulesRepository: SchedulesRepository;
@@ -21,8 +21,10 @@ class SchedulesService{
   }
 
   async executeListSchedules(day: number, user_id: string){
-    const day_start = startOfDay(new Date(day));
-    const day_end = endOfDay(new Date(day));
+    const dayFormat = format(day, 'yyyy-MM-dd')
+    
+    const day_start = new Date(dayFormat + 'T00:00:00.000Z')
+    const day_end = new Date(dayFormat + 'T23:59:59.000Z')
 
     const schedules = await this.schedulesRepository.findByDayAndUser(day_start, day_end, user_id);
 
