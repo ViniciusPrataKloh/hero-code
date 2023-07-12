@@ -1,15 +1,29 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Schedule } from '../../components/schedule'
 import { DayPicker } from 'react-day-picker'
 import { ptBR } from 'date-fns/locale'
+import { AxiosError, AxiosResponse } from 'axios'
+import { format } from 'date-fns'
+import { api } from '../../utils/axios'
+import { Schedule } from '../../components/schedule'
 
 import styles from './calendar.module.css'
 
+interface ISchedule {
+    id: string
+    name: string
+    phone: string
+    date: Date
+}
+
 export function Home() {
     const [date, setDate] = useState<Date>(new Date())
+    const [schedules, setSchedules] = useState<ISchedule[]>([])
 
     const navigate = useNavigate()
+
+    const today = date.getTime()
+    const todayFormat = format(today, 'dd/MM/yyyy')
 
     function isWeekend(date: Date) {
         const day = date.getDay()
@@ -26,14 +40,24 @@ export function Home() {
     }
 
     useEffect(() => {
-        const token = localStorage.getItem('tokenHeroId')
+        async function getSchedules() {
+            await api
+                .get(`/schedules/${today}`)
+                .then((response: AxiosResponse) => {
+                    setSchedules(response.data)
+                })
+                .catch((reason: AxiosError<{ message: string }>) => {
+                    console.error(reason.response?.data.message)
+                })
+        }
 
+        const token = localStorage.getItem('tokenHeroId')
         if (!token) {
             navigate('/login')
         }
-    }, [])
 
-    const today = date.toLocaleDateString('pt-BR')
+        getSchedules()
+    }, [today, navigate])
 
     return (
         <main className="mt-8">
@@ -42,7 +66,7 @@ export function Home() {
                     Bem Vindo(a), <strong>Vinícius Prata!</strong>
                 </h2>
                 <span className="font-light leading-6">
-                    Esta é a sua lista de horários de hoje, dia {today} 😀
+                    Esta é a sua lista de horários de hoje, dia {todayFormat} 😀
                 </span>
             </div>
 
@@ -55,12 +79,19 @@ export function Home() {
                     {/* Left */}
                     <div className="col-span-1">
                         <div className="h-[4040px] max-h-[400px] overflow-auto border-r-2 -border-primary py-4">
-                            <Schedule hour="10h" client="Maiara Maraisa" />
-                            <Schedule hour="10h" client="Maiara Maraisa" />
-                            <Schedule hour="10h" client="Maiara Maraisa" />
-                            <Schedule hour="10h" client="Maiara Maraisa" />
-                            <Schedule hour="10h" client="Maiara Maraisa" />
-                            <Schedule hour="10h" client="Maiara Maraisa" />
+                            {schedules.length > 0 ? (
+                                schedules.map((schedule) => {
+                                    return (
+                                        <Schedule
+                                            key={schedule.id}
+                                            date={schedule.date}
+                                            client={schedule.name}
+                                        />
+                                    )
+                                })
+                            ) : (
+                                <></>
+                            )}
                         </div>
                     </div>
 
