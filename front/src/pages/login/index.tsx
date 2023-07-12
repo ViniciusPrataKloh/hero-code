@@ -34,8 +34,15 @@ export function Login() {
                 password,
             })
             .then((response: AxiosResponse) => {
-                const token = response.data.token
-                localStorage.setItem('tokenHeroId', token)
+                let token = localStorage.getItem('tokenHeroId')
+
+                if (token) {
+                    localStorage.removeItem('tokenHeroId')
+                }
+
+                token = response.data.token
+
+                localStorage.setItem('tokenHeroId', token!)
 
                 const { id, name, email } = response.data.user
                 handleSetUser(id, name, email)
