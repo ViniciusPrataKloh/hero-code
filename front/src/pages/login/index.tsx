@@ -6,10 +6,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { api } from '../../utils/axios'
 import { AxiosError, AxiosResponse } from 'axios'
 import * as zod from 'zod'
-
-import logo from '../../assets/logo.png'
 import { useContext } from 'react'
 import { AccountContext } from '../../contexts/AccountContext'
+
+import logo from '../../assets/logo.png'
 
 const signInFormSchema = zod.object({
     email: zod.string().email('Informe um email válido.'),
