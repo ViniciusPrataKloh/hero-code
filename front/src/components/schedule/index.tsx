@@ -1,5 +1,6 @@
-import { format } from 'date-fns'
 import { PencilSimple, Trash } from 'phosphor-react'
+import { useState } from 'react'
+import { ScheduleModalEdit } from '../scheduleModalEdit'
 
 interface Props {
     date: Date
@@ -7,6 +8,12 @@ interface Props {
 }
 
 export function Schedule({ date, client }: Props) {
+    const [modalIsOpen, setModalIsOpen] = useState<boolean>(true)
+
+    function handleOpenModal() {
+        setModalIsOpen(!modalIsOpen)
+    }
+
     const hour = date.toString().split(':', 4)[1]
     // const minutes = date.toString().split(':', 4)[2].split('.')[0]
 
@@ -19,13 +26,18 @@ export function Schedule({ date, client }: Props) {
 
                 <span className=" py-3 px-5 ">{client}</span>
             </div>
-            <div className="flex gap-3  py-3 px-5 ">
+            <button
+                className="flex gap-3  py-3 px-5 "
+                onClick={handleOpenModal}
+            >
                 <PencilSimple
                     color="#001489"
                     className=" hover:cursor-pointer"
                 />
                 <Trash color="red" className="hover:cursor-pointer" />
-            </div>
+            </button>
+
+            {modalIsOpen ? <ScheduleModalEdit /> : <></>}
         </div>
     )
 }

@@ -40,6 +40,12 @@ export function Home() {
     }
 
     useEffect(() => {
+        const token = localStorage.getItem('tokenHeroId')
+
+        if (!token) {
+            navigate('/login')
+        }
+
         async function getSchedules() {
             await api
                 .get(`/schedules/${today}`)
@@ -49,11 +55,6 @@ export function Home() {
                 .catch((reason: AxiosError<{ message: string }>) => {
                     console.error(reason.response?.data.message)
                 })
-        }
-
-        const token = localStorage.getItem('tokenHeroId')
-        if (!token) {
-            navigate('/login')
         }
 
         getSchedules()
