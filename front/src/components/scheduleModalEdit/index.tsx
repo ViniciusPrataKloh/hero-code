@@ -4,15 +4,27 @@ import { InputTransparent } from '../inputTransparent'
 import { useState } from 'react'
 import { ISchedule } from '../../interfaces/ISchedule.interface'
 import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
 
 interface IScheduleModalProps {
     schedule: ISchedule
 }
 
+const editScheduleFormSchema = zod.object({
+    date: zod.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    hour: zod.string().regex(/^\d{2}:\d{2}$/),
+})
+
+type editScheduleFormSchemaType = zod.infer<typeof editScheduleFormSchema>
+
 export function ScheduleModalEdit({ schedule }: IScheduleModalProps) {
     const [modalIsOpen, setModalIsOpen] = useState<boolean>(true)
 
-    const { register, handleSubmit, watch } = useForm()
+    const { register, handleSubmit, watch } =
+        useForm<editScheduleFormSchemaType>({
+            resolver: zodResolver(editScheduleFormSchema),
+        })
 
     const newDate = watch('date')
     const newHour = watch('hour')
