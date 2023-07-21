@@ -8,13 +8,7 @@ import { api } from '../../utils/axios'
 import { Schedule } from '../../components/schedule'
 
 import styles from './calendar.module.css'
-
-interface ISchedule {
-    id: string
-    name: string
-    phone: string
-    date: Date
-}
+import { ISchedule } from '../../interfaces/ISchedule.interface'
 
 export function Home() {
     const [date, setDate] = useState<Date>(new Date())
@@ -85,8 +79,7 @@ export function Home() {
                                     return (
                                         <Schedule
                                             key={schedule.id}
-                                            date={schedule.date}
-                                            client={schedule.name}
+                                            schedule={schedule}
                                         />
                                     )
                                 })

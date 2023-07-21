@@ -1,20 +1,21 @@
 import { PencilSimple, Trash } from 'phosphor-react'
 import { useState } from 'react'
 import { ScheduleModalEdit } from '../scheduleModalEdit'
+import { ISchedule } from '../../interfaces/ISchedule.interface'
+// import { date } from 'zod'
 
-interface Props {
-    date: Date
-    client: string
+interface IProps {
+    schedule: ISchedule
 }
 
-export function Schedule({ date, client }: Props) {
-    const [modalIsOpen, setModalIsOpen] = useState<boolean>(true)
+export function Schedule({ schedule }: IProps) {
+    const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
 
     function handleOpenModal() {
         setModalIsOpen(!modalIsOpen)
     }
 
-    const hour = date.toString().split(':', 4)[1]
+    const hour = schedule.date.toString().split(':', 4)[1]
     // const minutes = date.toString().split(':', 4)[2].split('.')[0]
 
     return (
@@ -24,7 +25,7 @@ export function Schedule({ date, client }: Props) {
                     {hour}h
                 </div>
 
-                <span className=" py-3 px-5 ">{client}</span>
+                <span className=" py-3 px-5 ">{schedule.name}</span>
             </div>
             <button
                 className="flex gap-3  py-3 px-5 "
@@ -37,7 +38,7 @@ export function Schedule({ date, client }: Props) {
                 <Trash color="red" className="hover:cursor-pointer" />
             </button>
 
-            {modalIsOpen ? <ScheduleModalEdit /> : <></>}
+            {modalIsOpen ? <ScheduleModalEdit schedule={schedule} /> : <></>}
         </div>
     )
 }
