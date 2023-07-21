@@ -2,9 +2,16 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { Clock, X } from 'phosphor-react'
 import { InputTransparent } from '../inputTransparent'
 import { useState } from 'react'
+import { ISchedule } from '../../interfaces/ISchedule.interface'
 
-export function ScheduleModalEdit() {
+interface IScheduleModalProps {
+    schedule: ISchedule
+}
+
+export function ScheduleModalEdit({ schedule }: IScheduleModalProps) {
     const [modalIsOpen, setModalIsOpen] = useState<boolean>(true)
+
+    const hour = schedule.date.toString().split(':', 4)[1]
 
     return (
         <Dialog.Root open={modalIsOpen}>
@@ -20,8 +27,8 @@ export function ScheduleModalEdit() {
                     </Dialog.Title>
 
                     <Dialog.Description className="flex gap-6 mt-2 mx-5 -text-secondary font-semibold text-xl drop-shadow">
-                        <span>10h</span>
-                        <span>Luana Prado</span>
+                        <span>{hour}h</span>
+                        <span>{schedule.name}</span>
                     </Dialog.Description>
 
                     <form className="flex flex-col gap-6 mt-6 mx-5 -text-primary">
