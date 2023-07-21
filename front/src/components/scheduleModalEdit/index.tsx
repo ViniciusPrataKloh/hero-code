@@ -3,6 +3,7 @@ import { Clock, X } from 'phosphor-react'
 import { InputTransparent } from '../inputTransparent'
 import { useState } from 'react'
 import { ISchedule } from '../../interfaces/ISchedule.interface'
+import { useForm } from 'react-hook-form'
 
 interface IScheduleModalProps {
     schedule: ISchedule
@@ -10,6 +11,15 @@ interface IScheduleModalProps {
 
 export function ScheduleModalEdit({ schedule }: IScheduleModalProps) {
     const [modalIsOpen, setModalIsOpen] = useState<boolean>(true)
+
+    const { register, handleSubmit, watch } = useForm()
+
+    const newDate = watch('date')
+    const newHour = watch('hour')
+
+    function onHandleSubmit() {
+        console.log({ newDate, newHour })
+    }
 
     const hour = schedule.date.toString().split(':', 4)[1]
 
@@ -31,14 +41,17 @@ export function ScheduleModalEdit({ schedule }: IScheduleModalProps) {
                         <span>{schedule.name}</span>
                     </Dialog.Description>
 
-                    <form className="flex flex-col gap-6 mt-6 mx-5 -text-primary">
+                    <form
+                        className="flex flex-col gap-6 mt-6 mx-5 -text-primary"
+                        onSubmit={handleSubmit(onHandleSubmit)}
+                    >
                         <div className="flex flex-row h-8 items-center justify-between">
                             <label>Indique a nova data:</label>
                             <div className="w-[128px]">
                                 <InputTransparent
                                     placeholder=""
                                     type="date"
-                                    // register={{ ...register('date') }}
+                                    register={{ ...register('date') }}
                                 />
                             </div>
                         </div>
@@ -50,7 +63,7 @@ export function ScheduleModalEdit({ schedule }: IScheduleModalProps) {
                                     placeholder=""
                                     type="time"
                                     icon={<Clock size={20} />}
-                                    // register={{ ...register('hour') }}
+                                    register={{ ...register('hour') }}
                                 />
                             </div>
                         </div>
