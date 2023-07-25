@@ -16,7 +16,6 @@ export function Schedule({ schedule }: IProps) {
     }
 
     const hour = schedule.date.toString().split(':', 4)[1]
-    // const minutes = date.toString().split(':', 4)[2].split('.')[0]
 
     return (
         <div className="w-[492px] mt-6 flex flex-row items-center justify-between bg-white rounded-2xl shadow-lg shadow-gray-400">

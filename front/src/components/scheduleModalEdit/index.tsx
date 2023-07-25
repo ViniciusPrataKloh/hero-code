@@ -6,6 +6,8 @@ import { ISchedule } from '../../interfaces/ISchedule.interface'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
+import { api } from '../../utils/axios'
+import { AxiosError } from 'axios'
 
 interface IScheduleModalProps {
     schedule: ISchedule
@@ -29,8 +31,24 @@ export function ScheduleModalEdit({ schedule }: IScheduleModalProps) {
     const newDate = watch('date')
     const newHour = watch('hour')
 
-    function onHandleSubmit() {
-        console.log({ newDate, newHour })
+    async function updateSchedule(newTime: Date) {
+        await api
+            .put(`/schedules/${schedule.id}`, {
+                date: newTime,
+            })
+            .then(() => {
+                setModalIsOpen(!modalIsOpen)
+            })
+            .catch((reason: AxiosError<{ message: string }>) => {
+                console.error(reason.response?.data.message)
+            })
+    }
+
+    async function onHandleSubmit() {
+        const newTime = new Date(newDate + ' 00:' + newHour) // .getTime()
+        console.log(newTime)
+
+        await updateSchedule(newTime)
     }
 
     const hour = schedule.date.toString().split(':', 4)[1]
