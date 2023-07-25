@@ -1,13 +1,13 @@
-import * as Dialog from '@radix-ui/react-dialog'
 import { Clock, X } from 'phosphor-react'
 import { InputTransparent } from '../inputTransparent'
 import { useState } from 'react'
 import { ISchedule } from '../../interfaces/ISchedule.interface'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import * as zod from 'zod'
 import { api } from '../../utils/axios'
 import { AxiosError } from 'axios'
+import * as zod from 'zod'
+import * as Dialog from '@radix-ui/react-dialog'
 
 interface IScheduleModalProps {
     schedule: ISchedule

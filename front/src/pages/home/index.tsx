@@ -6,10 +6,10 @@ import { AxiosError, AxiosResponse } from 'axios'
 import { format } from 'date-fns'
 import { api } from '../../utils/axios'
 import { Schedule } from '../../components/schedule'
-
-import styles from './calendar.module.css'
 import { ISchedule } from '../../interfaces/ISchedule.interface'
 import { CalendarX } from 'phosphor-react'
+
+import styles from './calendar.module.css'
 
 export function Home() {
     const [date, setDate] = useState<Date>(new Date())
@@ -62,7 +62,8 @@ export function Home() {
                     Bem Vindo(a), <strong>Vinícius Prata!</strong>
                 </h2>
                 <span className="font-light leading-6">
-                    Esta é a sua lista de horários de hoje, dia {todayFormat} 😀
+                    Esta é a sua lista de horários de hoje, dia{' '}
+                    <strong className="font-medium">{todayFormat}</strong> 😀
                 </span>
             </div>
 
@@ -102,7 +103,6 @@ export function Home() {
                             mode="single"
                             disableNavigation
                             showOutsideDays
-                            // fixedWeeks
                             locale={ptBR}
                             className={styles.calendar}
                             classNames={{ day: styles.day }}
