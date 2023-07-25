@@ -9,6 +9,7 @@ import { Schedule } from '../../components/schedule'
 
 import styles from './calendar.module.css'
 import { ISchedule } from '../../interfaces/ISchedule.interface'
+import { CalendarX } from 'phosphor-react'
 
 export function Home() {
     const [date, setDate] = useState<Date>(new Date())
@@ -85,7 +86,12 @@ export function Home() {
                                     )
                                 })
                             ) : (
-                                <></>
+                                <div className="flex flex-row gap-4 items-center justify-center mt-8">
+                                    <CalendarX size={32} weight="fill" />
+                                    <span>
+                                        Não há agendamentos para esta data.
+                                    </span>
+                                </div>
                             )}
                         </div>
                     </div>
