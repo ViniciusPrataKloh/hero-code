@@ -80,6 +80,7 @@ export function Home() {
                                         <Schedule
                                             key={schedule.id}
                                             schedule={schedule}
+                                            handleDateChange={handleDateChange}
                                         />
                                     )
                                 })

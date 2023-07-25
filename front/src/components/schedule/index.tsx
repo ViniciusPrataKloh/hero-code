@@ -6,9 +6,10 @@ import { ISchedule } from '../../interfaces/ISchedule.interface'
 
 interface IProps {
     schedule: ISchedule
+    handleDateChange: (newTime: Date) => void
 }
 
-export function Schedule({ schedule }: IProps) {
+export function Schedule({ schedule, handleDateChange }: IProps) {
     const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
 
     function handleOpenModal() {
@@ -37,7 +38,14 @@ export function Schedule({ schedule }: IProps) {
                 <Trash color="red" className="hover:cursor-pointer" />
             </button>
 
-            {modalIsOpen ? <ScheduleModalEdit schedule={schedule} /> : <></>}
+            {modalIsOpen ? (
+                <ScheduleModalEdit
+                    schedule={schedule}
+                    handleDateChange={handleDateChange}
+                />
+            ) : (
+                <></>
+            )}
         </div>
     )
 }

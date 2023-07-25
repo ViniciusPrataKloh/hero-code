@@ -11,6 +11,7 @@ import { AxiosError } from 'axios'
 
 interface IScheduleModalProps {
     schedule: ISchedule
+    handleDateChange: (newTime: Date) => void
 }
 
 const editScheduleFormSchema = zod.object({
@@ -20,7 +21,10 @@ const editScheduleFormSchema = zod.object({
 
 type editScheduleFormSchemaType = zod.infer<typeof editScheduleFormSchema>
 
-export function ScheduleModalEdit({ schedule }: IScheduleModalProps) {
+export function ScheduleModalEdit({
+    schedule,
+    handleDateChange,
+}: IScheduleModalProps) {
     const [modalIsOpen, setModalIsOpen] = useState<boolean>(true)
 
     const { register, handleSubmit, watch } =
@@ -37,6 +41,7 @@ export function ScheduleModalEdit({ schedule }: IScheduleModalProps) {
                 date: newTime,
             })
             .then(() => {
+                handleDateChange(newTime)
                 setModalIsOpen(!modalIsOpen)
             })
             .catch((reason: AxiosError<{ message: string }>) => {
@@ -45,8 +50,7 @@ export function ScheduleModalEdit({ schedule }: IScheduleModalProps) {
     }
 
     async function onHandleSubmit() {
-        const newTime = new Date(newDate + ' 00:' + newHour) // .getTime()
-        console.log(newTime)
+        const newTime = new Date(newDate + ' 00:' + newHour)
 
         await updateSchedule(newTime)
     }
