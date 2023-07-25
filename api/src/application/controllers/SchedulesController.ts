@@ -51,7 +51,6 @@ class SchedulesController{
     try{
       const { name, phone, date } = request.body;
       const { schedule_id } = request.params;
-      console.log(phone);
 
       const scheduleResponse = await this.schedulesService.executeUpdateSchedule(schedule_id, name, phone, date);
 

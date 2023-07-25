@@ -54,8 +54,6 @@ class SchedulesService{
     schedule.phone = (schedule.phone === phone) ? schedule.phone : phone; 
     schedule.date = (schedule.date === date) ? schedule.date : date; 
 
-    console.log(schedule);
-
     schedule = await this.schedulesRepository.update(schedule_id, schedule.name, schedule.phone, schedule.date);
 
     return schedule;
