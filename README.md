@@ -8,9 +8,13 @@
 
 <br>
 
-##  Projeto
+## ✅ Projeto
 
 Projeto desenvolvido durante a Semana do Herói - hero Code.
+
+## 🏅 Além do evento
+
+Este projeto foi recriado do total zero por mim, utilizando arquitetura e patterns diferentes, além da interface totalmente recriada utilizando TailwindCSS (no evento foi utilizado css-modules).
 
 ## ✨ Tecnologias
 
@@ -47,4 +51,10 @@ Faça o clone do repositório para ter uma versão do projeto em sua máquina:<b
 
 ### 🚀 Iniciar o projeto back-end
 `$ cd api && npm run dev`
+
+
+## Layout do Figma
+
+Para acessar o layout da aplicação, clique [aqui](https://www.figma.com/file/vvRaQtkZrUvWIvmVvUabJ9/Hero-Hairdresses-(Copy)?type=design&node-id=56-660&mode=design&t=SEPqK3nCACCEwAzs-0).
+
 <br />
