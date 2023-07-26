@@ -10,7 +10,7 @@
 
 ## ✅ Projeto
 
-Projeto desenvolvido durante a Semana do Herói - hero Code.
+Projeto desenvolvido durante a Semana do Herói - hero Code, para agendamentos em salão.
 
 ## 🏅 Além do evento
 
@@ -33,8 +33,8 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
  - Manipulação de rotas, com React Router DOM
  - Validação de formulários com Zod
- - Context API, para implementação do contexto de Posts
- - API do Github para busca dos repositórios e das issues
+ - Context API, para implementação do contexto de usuário
+ - Design Patterns
  - Autenticação JWT
 
 ## Utilização do projeto
