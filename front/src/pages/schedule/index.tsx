@@ -34,7 +34,7 @@ export function Schedule() {
             })
             .then(() => {
                 alert('Agendamento criado com sucesso!')
-                navigate('/schedule')
+                navigate('/')
             })
             .catch((reason: AxiosError<{ message: string }>) => {
                 console.error(reason.response?.data.message)

@@ -35,7 +35,7 @@ export function Profile() {
                         className="-bg-primary w-10 h-10 -translate-x-10 rounded-full px-2 py-2 flex items-center justify-center cursor-pointer"
                     >
                         <PencilSimple color="#fff" size={18} weight="fill" />
-                        <input type="file" />
+                        {/* <input type="file" className="hidden" /> */}
                     </label>
                 </div>
 
@@ -43,13 +43,25 @@ export function Profile() {
                     <label>Nome</label>
                     <InputTransparent placeholder="Seu nome aqui" type="text" />
                     <label>Email</label>
-                    <InputTransparent placeholder="Seu nome aqui" type="text" />
+                    <InputTransparent
+                        placeholder="Confirmar email"
+                        type="text"
+                    />
                     <label>Senha atual</label>
-                    <InputTransparent placeholder="Seu nome aqui" type="text" />
+                    <InputTransparent
+                        placeholder="Sua senha antiga aqui"
+                        type="text"
+                    />
                     <label>Nova senha</label>
-                    <InputTransparent placeholder="Seu nome aqui" type="text" />
+                    <InputTransparent
+                        placeholder="Nova senha aqui"
+                        type="text"
+                    />
                     <label>Confirmar senha</label>
-                    <InputTransparent placeholder="Seu nome aqui" type="text" />
+                    <InputTransparent
+                        placeholder="Confirmar nova senha"
+                        type="text"
+                    />
 
                     <div className="mt-10 flex items-start justify-center gap-4">
                         <button className="w-[110px] py-2.5 px-4 border-2 -border-secondary -text-secondary font-semibold rounded-2xl hover:text-white hover:bg-red-400 hover:border-red-500 transition-colors">
