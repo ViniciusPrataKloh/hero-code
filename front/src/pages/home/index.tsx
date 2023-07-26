@@ -49,6 +49,12 @@ export function Home() {
                 })
                 .catch((reason: AxiosError<{ message: string }>) => {
                     console.error(reason.response?.data.message)
+
+                    // if (reason.response?.data.message === 'Token expired') {
+                    //     localStorage.removeItem('tokenHeroId')
+                    // }
+
+                    // navigate('/login')
                 })
         }
 
