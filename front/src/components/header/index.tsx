@@ -46,12 +46,14 @@ export function Header() {
                     <div className=" font-normal">
                         <ul className="flex flex-col items-center absolute -bg-primary top-0 right-0 list-none rounded-lg shadow-black/70 shadow-md">
                             <Link
+                                onClick={handleOpenCloseDropdown}
                                 to="/schedule"
                                 className="w-full px-3 py-4 items-center justify-center hover:-bg-primary-50 hover: rounded-lg"
                             >
                                 Agendamentos
                             </Link>
                             <Link
+                                onClick={handleOpenCloseDropdown}
                                 to="/profile"
                                 className="w-full px-7 py-4 items-center justify-center hover:-bg-primary-50 hover: rounded-lg"
                             >
